@@ -10,6 +10,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-pulse-slower: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
 }
 
 @media (prefers-color-scheme: dark) {
