@@ -3,9 +3,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as React from "react";
 import type { TargetAndTransition } from "framer-motion";
-import { motion, useReducedMotion } from "framer-motion";
+import { LazyMotion, m, useReducedMotion } from "framer-motion";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
 import { Section } from "./Section";
+
+const loadMotionFeatures = () =>
+  import("@/lib/motion-features").then((res) => res.default);
 
 const buttonMotion = {
   whileHover: { scale: 1.02, y: -1 },
@@ -188,118 +191,119 @@ export function Hero() {
       };
 
   return (
-    <header className="relative overflow-hidden">
-      {/* Ambient background */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div
-          className="absolute -top-24 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full blur-3xl"
-          style={{
-            background:
-              "radial-gradient(closest-side, rgba(56,189,248,0.18), transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute -bottom-40 left-1/2 h-[560px] w-[980px] -translate-x-1/2 rounded-full blur-3xl"
-          style={{
-            background:
-              "radial-gradient(closest-side, rgba(167,139,250,0.16), transparent 70%)",
-          }}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.06)_1px,transparent_0)] [background-size:26px_26px] opacity-60" />
-      </div>
+    <LazyMotion features={loadMotionFeatures} strict>
+      <header className="relative overflow-hidden">
+        {/* Ambient background */}
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div
+            className="absolute -top-24 left-1/2 h-[520px] w-[920px] -translate-x-1/2 rounded-full blur-3xl"
+            style={{
+              background:
+                "radial-gradient(closest-side, rgba(56,189,248,0.18), transparent 70%)",
+            }}
+          />
+          <div
+            className="absolute -bottom-40 left-1/2 h-[560px] w-[980px] -translate-x-1/2 rounded-full blur-3xl"
+            style={{
+              background:
+                "radial-gradient(closest-side, rgba(167,139,250,0.16), transparent 70%)",
+            }}
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.06)_1px,transparent_0)] [background-size:26px_26px] opacity-60" />
+        </div>
 
-      <Section className="relative py-16 sm:py-20 lg:py-24">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ staggerChildren: 0.08, delayChildren: 0.05 }}
-            className="flex flex-col items-start"
-          >
-            <motion.div
-              variants={fadeUp}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm text-white/80"
+        <Section className="relative py-16 sm:py-20 lg:py-24">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+            <m.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ staggerChildren: 0.08, delayChildren: 0.05 }}
+              className="flex flex-col items-start"
             >
-              <Sparkles className="size-4 text-sky-300" aria-hidden="true" />
-              <span>FlowPilot preview</span>
-            </motion.div>
-
-            <motion.h1
-              variants={fadeUp}
-              className="mt-5 text-balance text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-6xl"
-            >
-              Orchestrate Team Intelligence without the Friction
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              className="mt-5 max-w-xl text-pretty text-base leading-7 text-white/70 sm:text-lg"
-            >
-              The all-in-one workspace where ideas, tasks, and decisions converge.
-              Built for high-velocity teams who refuse to be slowed down.
-            </motion.p>
-
-            <motion.div
-              variants={fadeUp}
-              className="mt-7 flex w-full flex-col gap-3 sm:flex-row sm:items-center"
-            >
-              <motion.a
-                href="#get-started"
-                {...buttonMotion}
-                className={[
-                  "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold",
-                  "bg-white text-slate-950 shadow-[0_10px_40px_-18px_rgba(255,255,255,0.45)]",
-                  "transition-colors duration-150",
-                  "hover:bg-white/95 hover:shadow-[0_10px_40px_-12px_rgba(255,255,255,0.3)]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
-                ].join(" ")}
+              <m.div
+                variants={fadeUp}
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm text-white/80"
               >
-                Get Started
-                <motion.span aria-hidden="true" {...iconSlide}>
-                  <ArrowRight className="size-4" />
-                </motion.span>
-              </motion.a>
+                <Sparkles className="size-4 text-sky-300" aria-hidden="true" />
+                <span>FlowPilot preview</span>
+              </m.div>
 
-              <motion.a
-                href="#watch-demo"
-                {...buttonMotion}
-                className={[
-                  "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold",
-                  "border border-white/15 bg-white/[0.04] text-white",
-                  "transition-colors duration-150",
-                  "hover:bg-white/[0.08]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
-                ].join(" ")}
+              <m.h1
+                variants={fadeUp}
+                className="mt-5 text-balance text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-6xl"
               >
-                <motion.span aria-hidden="true" {...iconSlide}>
-                  <Play className="size-4" />
-                </motion.span>
-                Watch Demo
-              </motion.a>
-            </motion.div>
-          </motion.div>
+                Orchestrate Team Intelligence without the Friction
+              </m.h1>
 
-          {/* Visual / Mockup */}
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.35 }}
-            variants={mockIn}
-            className="relative"
-          >
-            {/* Mesh/radial behind bento */}
-            <div
-              className="pointer-events-none absolute -inset-8 -z-10 rounded-[32px] opacity-90 blur-2xl"
-              style={{
-                background:
-                  "radial-gradient(60% 60% at 35% 25%, rgba(56,189,248,0.22), transparent 70%), radial-gradient(50% 55% at 80% 30%, rgba(167,139,250,0.20), transparent 70%), radial-gradient(50% 60% at 60% 90%, rgba(34,197,94,0.12), transparent 70%)",
-              }}
-              aria-hidden="true"
-            />
+              <m.p
+                variants={fadeUp}
+                className="mt-5 max-w-xl text-pretty text-base leading-7 text-white/70 sm:text-lg"
+              >
+                The all-in-one workspace where ideas, tasks, and decisions converge.
+                Built for high-velocity teams who refuse to be slowed down.
+              </m.p>
 
-            <motion.div animate={floaty} className="relative">
-              <div className="grid gap-4 sm:grid-cols-2">
+              <m.div
+                variants={fadeUp}
+                className="mt-7 flex w-full flex-col gap-3 sm:flex-row sm:items-center"
+              >
+                <m.a
+                  href="#get-started"
+                  {...buttonMotion}
+                  className={[
+                    "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold",
+                    "bg-white text-slate-950 shadow-[0_10px_40px_-18px_rgba(255,255,255,0.45)]",
+                    "transition-colors duration-150",
+                    "hover:bg-white/95 hover:shadow-[0_10px_40px_-12px_rgba(255,255,255,0.3)]",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+                  ].join(" ")}
+                >
+                  Get Started
+                  <m.span aria-hidden="true" {...iconSlide}>
+                    <ArrowRight className="size-4" />
+                  </m.span>
+                </m.a>
+
+                <m.a
+                  href="#watch-demo"
+                  {...buttonMotion}
+                  className={[
+                    "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold",
+                    "border border-white/15 bg-white/[0.04] text-white",
+                    "transition-colors duration-150",
+                    "hover:bg-white/[0.08]",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
+                  ].join(" ")}
+                >
+                  <m.span aria-hidden="true" {...iconSlide}>
+                    <Play className="size-4" />
+                  </m.span>
+                  Watch Demo
+                </m.a>
+              </m.div>
+            </m.div>
+
+            {/* Visual / Mockup */}
+            <m.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.35 }}
+              variants={mockIn}
+              className="relative"
+            >
+              {/* Mesh/radial behind bento */}
+              <div
+                className="pointer-events-none absolute -inset-8 -z-10 rounded-[32px] opacity-90 blur-2xl"
+                style={{
+                  background:
+                    "radial-gradient(60% 60% at 35% 25%, rgba(56,189,248,0.22), transparent 70%), radial-gradient(50% 55% at 80% 30%, rgba(167,139,250,0.20), transparent 70%), radial-gradient(50% 60% at 60% 90%, rgba(34,197,94,0.12), transparent 70%)",
+                }}
+                aria-hidden="true"
+              />
+
+              <m.div animate={floaty} className="relative">
+                <div className="grid gap-4 sm:grid-cols-2">
                 <Card className="p-5 sm:col-span-2">
                   <div className="flex items-center justify-between">
                     <div className="min-w-0">
@@ -399,12 +403,13 @@ export function Hero() {
                     </div>
                   </div>
                 </Card>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </Section>
-    </header>
+                </div>
+              </m.div>
+            </m.div>
+          </div>
+        </Section>
+      </header>
+    </LazyMotion>
   );
 }
 
