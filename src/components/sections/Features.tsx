@@ -37,7 +37,7 @@ const cardBase =
 export function Features() {
   return (
     <LazyMotion features={loadMotionFeatures} strict>
-      <section aria-labelledby="features-heading" className="relative">
+      <section id="features" aria-labelledby="features-heading" className="relative">
         <Section className="py-14 sm:py-16 lg:py-20">
           <m.div
             initial={{ opacity: 0, y: 10 }}

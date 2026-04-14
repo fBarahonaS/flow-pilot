@@ -27,7 +27,7 @@ const benefits = [
 
 export function Benefits() {
   return (
-    <Section className="py-24">
+    <Section id="benefits" className="py-24">
       <div className="flex flex-col gap-20 md:gap-32">
         {benefits.map(({ title, description, glowColor, Icon }, index) => (
           <motion.div
