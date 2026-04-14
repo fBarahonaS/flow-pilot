@@ -26,7 +26,6 @@ if (!global.IntersectionObserver) {
     unobserve() {}
   }
 
-  // @ts-expect-error - test-only polyfill
   global.IntersectionObserver = IntersectionObserverMock;
 }
 

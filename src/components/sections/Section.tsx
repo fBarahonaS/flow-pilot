@@ -1,19 +1,19 @@
 import * as React from "react";
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   contained?: boolean;
 }
 
 export function Section({
-  as: Comp = "section",
+  as: Component = "section",
   contained = true,
   className,
   children,
   ...props
 }: SectionProps) {
   return (
-    <Comp
+    <Component
       className={[
         "w-full px-4 sm:px-6 lg:px-8",
         contained ? "mx-auto max-w-7xl" : "",
@@ -24,7 +24,7 @@ export function Section({
       {...props}
     >
       {children}
-    </Comp>
+    </Component>
   );
 }
 

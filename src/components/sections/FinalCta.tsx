@@ -1,5 +1,19 @@
+ "use client";
+
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Section } from "./Section";
+
+const buttonMotion = {
+  whileHover: { scale: 1.02, y: -1 },
+  whileTap: { scale: 0.96 },
+  transition: { type: "spring", stiffness: 400, damping: 15 },
+} as const;
+
+const iconSlide = {
+  whileHover: { x: 3 },
+  transition: { type: "spring", stiffness: 400, damping: 15 },
+} as const;
 
 export function FinalCta() {
   return (
@@ -29,19 +43,22 @@ export function FinalCta() {
               </p>
             </div>
 
-            <a
+            <motion.a
               href="#schedule-demo"
+              {...buttonMotion}
               className={[
                 "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold",
                 "bg-white text-slate-950 shadow-[0_10px_40px_-18px_rgba(255,255,255,0.45)]",
-                "transition-transform transition-colors duration-150",
-                "hover:bg-white/95 active:scale-[0.98]",
+                "transition-colors duration-150",
+                "hover:bg-white/95 hover:shadow-[0_10px_40px_-12px_rgba(255,255,255,0.3)]",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
               ].join(" ")}
             >
               Schedule a Demo
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </a>
+              <motion.span aria-hidden="true" {...iconSlide}>
+                <ArrowRight className="size-4" />
+              </motion.span>
+            </motion.a>
           </div>
         </div>
       </Section>

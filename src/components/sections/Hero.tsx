@@ -2,9 +2,21 @@
 
 /* eslint-disable react/no-unescaped-entities */
 import * as React from "react";
+import type { TargetAndTransition } from "framer-motion";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
 import { Section } from "./Section";
+
+const buttonMotion = {
+  whileHover: { scale: 1.02, y: -1 },
+  whileTap: { scale: 0.96 },
+  transition: { type: "spring", stiffness: 400, damping: 15 },
+} as const;
+
+const iconSlide = {
+  whileHover: { x: 3 },
+  transition: { type: "spring", stiffness: 400, damping: 15 },
+} as const;
 
 function clamp01(v: number) {
   return Math.max(0, Math.min(1, v));
@@ -168,11 +180,11 @@ export function Hero() {
     },
   } as const;
 
-  const floaty = reduceMotion
+  const floaty: TargetAndTransition | undefined = reduceMotion
     ? undefined
     : {
-        y: [0, -6, 0],
-        transition: { duration: 3.2, ease: "easeInOut", repeat: Infinity },
+        y: [0, -10, 0],
+        transition: { repeat: Infinity, duration: 2, ease: "easeInOut" },
       };
 
   return (
@@ -232,33 +244,39 @@ export function Hero() {
               variants={fadeUp}
               className="mt-7 flex w-full flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <a
+              <motion.a
                 href="#get-started"
+                {...buttonMotion}
                 className={[
                   "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold",
                   "bg-white text-slate-950 shadow-[0_10px_40px_-18px_rgba(255,255,255,0.45)]",
-                  "transition-transform transition-colors duration-150",
-                  "hover:bg-white/95 active:scale-[0.98]",
+                  "transition-colors duration-150",
+                  "hover:bg-white/95 hover:shadow-[0_10px_40px_-12px_rgba(255,255,255,0.3)]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                 ].join(" ")}
               >
                 Get Started
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </a>
+                <motion.span aria-hidden="true" {...iconSlide}>
+                  <ArrowRight className="size-4" />
+                </motion.span>
+              </motion.a>
 
-              <a
+              <motion.a
                 href="#watch-demo"
+                {...buttonMotion}
                 className={[
                   "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold",
                   "border border-white/15 bg-white/[0.04] text-white",
                   "transition-colors duration-150",
-                  "hover:bg-white/[0.08] active:bg-white/[0.10]",
+                  "hover:bg-white/[0.08]",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
                 ].join(" ")}
               >
-                <Play className="size-4" aria-hidden="true" />
+                <motion.span aria-hidden="true" {...iconSlide}>
+                  <Play className="size-4" />
+                </motion.span>
                 Watch Demo
-              </a>
+              </motion.a>
             </motion.div>
           </motion.div>
 
