@@ -20,12 +20,12 @@
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
-  
-  .animate-marquee {
-    display: flex;
-    width: max-content;
-    animation: marquee 40s linear infinite;
-  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
 }
 
 @media (prefers-color-scheme: dark) {
