@@ -3,6 +3,7 @@ import { Features } from "@/components/sections/Features";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Benefits } from "@/components/sections/Benefits";
 import { Footer } from "@/components/sections/Footer";
+import { SocialTrust } from "@/components/sections/SocialTrust";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Features />
       <Benefits />
+      <SocialTrust />
       <FinalCta />
       <Footer />
     </main>
