@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { Hero } from "./Hero";
 
 describe("Hero", () => {
-  it("renders core copy and CTAs", () => {
-    render(<Hero />);
+  it("renders core copy and CTAs", async () => {
+    await act(async () => {
+      render(<Hero />);
+    });
 
     expect(
       screen.getByRole("heading", {
@@ -15,13 +17,21 @@ describe("Hero", () => {
     expect(screen.getByRole("link", { name: /watch demo/i })).toBeInTheDocument();
   });
 
-  it("matches snapshot", () => {
-    const { container } = render(<Hero />);
+  it("matches snapshot", async () => {
+    let container;
+    await act(async () => {
+      const rendered = render(<Hero />);
+      container = rendered.container;
+    });
+
     expect(container).toMatchSnapshot();
   });
 
-  it("uses responsive text scale classes on the headline", () => {
-    render(<Hero />);
+  it("uses responsive text scale classes on the headline", async () => {
+    await act(async () => {
+      render(<Hero />);
+    });
+
     const h1 = screen.getByRole("heading", {
       name: /orchestrate team intelligence without the friction/i,
     });

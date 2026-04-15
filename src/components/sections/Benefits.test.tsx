@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { Benefits } from "./Benefits";
 
 describe("Benefits", () => {
-  it("renders all three key benefit headlines", () => {
-    render(<Benefits />);
+  it("renders all three key benefit headlines", async () => {
+    await act(async () => {
+      render(<Benefits />);
+    });
     
     expect(screen.getByText(/Reclaim Focused Engineering Time/i)).toBeInTheDocument();
     expect(screen.getByText(/Eliminate Knowledge Silos/i)).toBeInTheDocument();

@@ -23,6 +23,7 @@ exports[`Hero matches snapshot 1`] = `
     </div>
     <section
       class="w-full px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl relative py-16 sm:py-20 lg:py-24"
+      id="hero"
     >
       <div
         class="grid items-center gap-10 lg:grid-cols-2 lg:gap-12"
@@ -153,6 +154,7 @@ exports[`Hero matches snapshot 1`] = `
           />
           <div
             class="relative"
+            style="transform: none;"
           >
             <div
               class="grid gap-4 sm:grid-cols-2"

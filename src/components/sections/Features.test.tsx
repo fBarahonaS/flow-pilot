@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { Features } from "./Features";
 
 describe("Features", () => {
-  it("renders all feature titles", () => {
-    render(<Features />);
+  it("renders all feature titles", async () => {
+    await act(async () => {
+      render(<Features />);
+    });
 
     expect(
       screen.getByRole("heading", { name: /context-aware graph/i }),

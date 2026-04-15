@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import Page from "./page";
 
 describe("app/page", () => {
-  it("renders without crashing and shows the primary CTAs", () => {
-    render(<Page />);
+  it("renders without crashing and shows the primary CTAs", async () => {
+    await act(async () => {
+      render(<Page />);
+    });
 
     expect(
       screen.getByRole("link", { name: /get started/i }),

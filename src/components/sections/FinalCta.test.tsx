@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { FinalCta } from "./FinalCta";
 
 describe("FinalCta", () => {
-  it('has a "Schedule a Demo" happy path link', () => {
-    render(<FinalCta />);
+  it('has a "Schedule a Demo" happy path link', async () => {
+    await act(async () => {
+      render(<FinalCta />);
+    });
 
     const cta = screen.getByRole("link", { name: /schedule a demo/i });
     expect(cta).toBeVisible();
