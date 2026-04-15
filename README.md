@@ -2,7 +2,7 @@
 
 A high-fidelity landing page prototype for FlowPilot, an AI-driven intelligence layer for engineering teams. This project demonstrates senior-level frontend judgment, focusing on performance, accessibility, and high-end micro-interactions.
 
-🔥 Live Demo: [Vercel Link](https://vercel.com) 🔥 
+🔥 Live Demo: [Vercel Link](https://flowpilot-francisco-barahona.vercel.app/) 🔥 
 
 A defining characteristic of this project is the use of a high-standard, autonomous agent workflow. Rather than using AI for simple code completion, the environment was orchestrated via a structured "Command/Agent" instruction set.
 
